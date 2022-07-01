@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Library</title>
     <link rel="stylesheet" href="styles.css" >
+    <script src="script.js" defer></script>
 </head>
 <body>
     <div class="header">
@@ -32,18 +33,18 @@
         </div>
         <button id="addBook">+</button>
 
-        <form method="post" id="form" class="showForm">
+        <form method="post" id="form">
             <div class="cell">
                 <label for="title">Title<span class="required">*</span></label>
-                <input type="text" id="title" autocomplete="off" required placeholder=" " oninvalid="this.setCustomValidity('Please enter the title')" oninput="setCustomValidity('')" name="title">
+                <input type="text" id="title" autocomplete="off" required name="title">
             </div>
             <div class="cell">
                 <label for="author">Author</label>
-                <input type="text" id="author" autocomplete="off" placeholder=" " name="author">
+                <input type="text" id="author" autocomplete="off" name="author">
             </div>
             <div class="cell">
                 <label for="pages">Pages</label>
-                <input type="number" id="pages" autocomplete="off" placeholder=" " name="pages" min="0">
+                <input type="number" id="pages" autocomplete="off" name="pages" min="0">
             </div>
             <div class="cell">
                 <label for="status">Status</label>
@@ -69,7 +70,7 @@
                 <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody id="tbody">
 
             </tbody>
         </table>
