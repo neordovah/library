@@ -73,19 +73,25 @@ html, body {
     cursor: pointer;
  }
 #login {
-    font-size: 24px;
+    font-size: 22px;
     border-radius: 12px;
     padding: 8px 16px;
     background-color: white;
     border: solid 1px gray;
  }
+
+#login:hover {
+    background-color: #292524;
+    color: white;
+}
+
 #addBook {
     font-size: 40px;
     border-radius: 20px;
 }
 #addBook:hover {
-    background-color: var(--light-gray);
-    box-shadow: 0 0 5px var(--light-gray);
+    background-color: rgb(255, 255, 174);
+    box-shadow: 0 0 5px rgb(240, 240, 144);
 }
 
 table {
@@ -107,18 +113,11 @@ th {
     width: 20px;
 }
 
-form {
-    display: none;
-}
-
-.showForm {
-    display: block;
-}
-
 .cell {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+    margin: 5px;
 }
 
 #submit {
@@ -132,11 +131,36 @@ form {
     margin-top: 20px;
 }
 
+#submit:hover {
+    background-color: rgb(210, 255, 210);
+    box-shadow: 0 0 5px rgb(171, 209, 171);
+}
+
 .required {
     color: rgb(205, 77, 77);
 }
 
-input {
-    
+input, select {
+    height: 20px;
+    border: 0;
+    border-radius: 2px;
 }
- 
+
+input:focus, select:focus {
+    outline: none;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    min-width: 200px;
+}
+
+
+
+
+
+
+form {
+    display: none;
+}
