@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library</title>
+    <link rel="stylesheet" href="styles.css" >
+</head>
+<body>
+    <div class="header">
+        <button id="login">Log in</button>
+    </div>
+    <div class="sidebar">
+        <div class="logo">
+            <h1>Library</h1>
+        </div>
+        <div class="stats">
+            <p>Stats</p>
+            <div class="row">
+                <img src="./img/v.png">
+                <p>Books finished: <span id="booksFinished"></span></p>
+            </div>
+            <div class="row">
+                <img src="./img/arrow.png">
+                <p>Books on-going: <span id="booksBegun"></span></p>
+            </div>
+            <div class="row">
+                <img src="./img/x.png">
+                <p>Books not started: <span id="booksNotStarted"></span></p>
+            </div> 
+        </div>
+        <button id="addBook">+</button>
+
+        <form method="post" id="form" class="showForm">
+            <div class="cell">
+                <label for="title">Title<span class="required">*</span></label>
+                <input type="text" id="title" autocomplete="off" required placeholder=" " oninvalid="this.setCustomValidity('Please enter the title')" oninput="setCustomValidity('')" name="title">
+            </div>
+            <div class="cell">
+                <label for="author">Author</label>
+                <input type="text" id="author" autocomplete="off" placeholder=" " name="author">
+            </div>
+            <div class="cell">
+                <label for="pages">Pages</label>
+                <input type="number" id="pages" autocomplete="off" placeholder=" " name="pages" min="0">
+            </div>
+            <div class="cell">
+                <label for="status">Status</label>
+                <select id="status" name="status">
+                    <option value="finished">Finished</option>
+                    <option value="on-going">On-going</option>
+                    <option value="not-started">Not started</option>
+                </select>
+            </div>
+            <button id="submit" type="submit">Submit</button>
+        </form>  
+
+    </div>
+
+    <div class="container">
+        <table cellspacing="0" id="table">
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Pages</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+    <div class="footer">
+        <p>The Odin Project - Library</p>
+    </div>
+
+</body>
+</html>

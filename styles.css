@@ -1,0 +1,142 @@
+:root {
+    --light-gray: #e7e5e4;
+    --gray: #b6b6b6;
+    --dark-gray: #292524;
+}
+
+html, body {
+    min-height: 100vh;
+}
+
+@font-face {
+    font-family: Poppins;
+    src: url("Poppins-Regular.ttf");
+}
+
+* {
+    appearance: none;
+     padding: 0;
+     margin: 0;
+     box-sizing: border-box;
+     font-family: "Poppins";
+ }
+
+ body {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-template-rows: 1fr 8.5fr 0.5fr;
+    min-height: 100vh;
+}
+
+ .header {
+    background-color: var(--gray);
+    grid-column: 2 / 3;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 10px;
+}
+
+ .sidebar {
+    color: white;
+    grid-row: 1 / 3;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 32px;
+    gap: 32px;
+    background-color: var(--dark-gray);
+ }
+
+ .footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-column: 1 / 3;
+    background-color: black;
+    color: white;
+    text-shadow: 0 0 5px white;
+ }
+
+
+ .stats p {
+    padding: 6px 0;
+ }
+
+ .container {
+    background-color: var(--light-gray);
+    padding: 32px;
+ }
+
+ button {
+    border: 0;
+    cursor: pointer;
+ }
+#login {
+    font-size: 24px;
+    border-radius: 12px;
+    padding: 8px 16px;
+    background-color: white;
+    border: solid 1px gray;
+ }
+#addBook {
+    font-size: 40px;
+    border-radius: 20px;
+}
+#addBook:hover {
+    background-color: var(--light-gray);
+    box-shadow: 0 0 5px var(--light-gray);
+}
+
+table {
+    width: 100%;
+}
+
+th {
+    border-bottom: 2px solid gray;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.row > img {
+    height: 20px;
+    width: 20px;
+}
+
+form {
+    display: none;
+}
+
+.showForm {
+    display: block;
+}
+
+.cell {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+#submit {
+    border-radius: 8px;
+    font-size: 16px;
+    padding: 6px 12px;
+    align-self: center;
+    position: relative; 
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 20px;
+}
+
+.required {
+    color: rgb(205, 77, 77);
+}
+
+input {
+    
+}
+ 
