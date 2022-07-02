@@ -88,13 +88,22 @@ function newRow() {
     row.appendChild(newStatus);
     newStatus.innerText = myBook.status;
 
-   // newTrashcan = document.createElement("td");
-   // row.appendChild(newTrashcan);
-   // newTrashcan.innerHTML = '<button class="remove"><img src="./img/trash.png"></button>';
-   //newTrashcan.innerText = "Remove!";
-  // newTrashcan.classList.add("remove")
+    newTrashcan = document.createElement("td");
+    newTrashcan.classList.add("remove");
+    row.appendChild(newTrashcan);
+    newTrashcan.innerHTML = '<button><img src="./img/trash.png"></button>';
+    newTrashcan.id = i;
     tbody.appendChild(row);
-    //removeRows = document.querySelectorAll(".remove");
+    removeRows = document.querySelectorAll(".remove");
+
+    for(let a = 0; a < removeRows.length; a++) {
+        if(removeRows[a].id == row.id)
+          removeRows[a].addEventListener("click", () => {
+                console.log(removeRows[a])
+                console.log(row.id)
+    })
+    }
+    
     i++;
 }
 
@@ -102,12 +111,7 @@ let myBook = "";
 
 //////EVENT LISTENERS
 
-removeRows.forEach(element => {
-    element.addEventListener("click", () => {
-        console.log("da")
-    })
-    
-});
+
 
 submit.addEventListener("click", (e) => {
     e.preventDefault();
