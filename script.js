@@ -24,12 +24,20 @@ function Book(title, author, pages, status) {
 
 
 
-function removeRow(element) {
-    element.title = "";
-    element.author = "";
-    element.pages  = "";
-    element.status = "";
+function removeRow(row) {
+    id = row.id;
+    let removeRow = document.getElementById(`${id}`);
+    removeRow.remove();
+    console.log(id)
 }
+
+
+function removeRow2(id) {
+    let removeRow = document.getElementById(`${id}`);
+    removeRow.remove();
+}
+
+
 
 let bookAuthor, bookTitle, bookPages, bookStatus;
 
@@ -99,8 +107,18 @@ function newRow() {
     for(let a = 0; a < removeRows.length; a++) {
         if(removeRows[a].id == row.id)
           removeRows[a].addEventListener("click", () => {
-                console.log(removeRows[a])
-                console.log(row.id)
+            removeRow(row);
+
+                //console.log(removeRows[a])
+                //console.log(row.id)
+              /*  for(let a = 0; a < i; a++) {
+                removeRow2(a);
+                }
+
+                for(let a = 0; a < myLibrary.length; a++) {
+                    newRow(myLibrary[a]);
+                }*/
+
     })
     }
     
@@ -143,6 +161,8 @@ addBook.addEventListener("click", () => {
     toggleAddBook++;
     checkToggleBook(toggleAddBook);
 })
+/////
+
 
 
 //////////////////////////////////////////////
