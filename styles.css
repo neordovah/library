@@ -168,3 +168,25 @@ form {
 .showForm {
     display: block;
 }
+
+tbody td {
+    padding-top: 30px;
+    border-bottom: solid 1px lightgray;
+}
+
+tbody tr:hover {
+    background-color: lightgray;
+}
+
+.remove {
+    display: flex;
+    justify-self: stretch;
+    align-items: center;
+    background-color: red;
+}
+
+button.remove {
+    background-color: red;
+    width: 100%;
+    border: 2px solid black;
+}
