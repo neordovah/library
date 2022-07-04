@@ -25,18 +25,31 @@ function Book(title, author, pages, status) {
 
 
 
-function removeRow(row) {
+function removeRow2(row) {
     id = row.id;
     let removeRow = document.getElementById(`${id}`);
     removeRow.remove();
-    console.log(id)
 }
 
-
-function removeRow2(id) {
-    let removeRow = document.getElementById(`${id}`);
-    removeRow.remove();
+function renameTrIds() {
+    
+    let removeAll = document.querySelectorAll(".removeAll");
+    let removeAllCans = document.querySelectorAll(".remove");
+    let number = 0;
+    removeAll.forEach(removeRow => {
+        removeRow.id = number;
+        number++;
+    });
+    number = 0;
+    removeAllCans.forEach(removeCan => {
+        console.log(removeCan.id)
+        console.log(number)
+        removeCan.id = number;
+        number++;
+        console.log(removeCan.id)
+    });
 }
+
 
 
 
@@ -74,17 +87,24 @@ function resetForm() {
     status.value = "not-started";
 }
 
-function  redoId (i) {
-    myLibrary[i].id = myLibrary[i].id-1;
+function  redoId (removeRow) {
+    let id = parseInt(removeRow.id);
+    myLibrary.slice(id).forEach(Book => {
+        Book.id = Book.id-1;
+    })
 
+}
+
+function remakeRows() {
+    myLibrary.forEach(Book => {
+        newRow(Book);
+    })
 }
 
 function removeFromLibrary(removeRow) {
     let id = parseInt(removeRow.id);
-    console.log(removeRow.id, "  ", id)
     myLibrary = myLibrary.filter(Book => {
     return (Book.id !== id)   
-        console.log(myLibrary)
     });
 }
 
@@ -92,11 +112,10 @@ function removeFromLibrary(removeRow) {
 let tbody = document.getElementById("tbody");
 const form = document.getElementById("form");
 
-let i = 0;
 let newTrashcan;
-function newRow() {
+function newRow(myBook) {
     let row = document.createElement("tr");
-
+    row.classList.add("removeAll");
     row.id = myBook.id;
 
     let newTitle = document.createElement("td");
@@ -116,7 +135,7 @@ function newRow() {
     newTrashcan.classList.add("remove");
     row.appendChild(newTrashcan);
     newTrashcan.innerHTML = '<button><img src="./img/trash.png"></button>';
-    newTrashcan.id = i;
+    newTrashcan.id = myBook.id;
     tbody.appendChild(row);
     removeRows = document.querySelectorAll(".remove");
 
@@ -124,14 +143,13 @@ function newRow() {
         if(row.id == removeRow.id)
         removeRow.addEventListener("click", () => {
             removeFromLibrary(removeRow);
-            console.log(removeRow.id)
+            redoId(removeRow);
+            removeRow2(removeRow);
+            //remakeRows();
+            renameTrIds();
         }) 
     })
 
-    
-
-    
-    i++;
 }
 
 let myBook = "";
@@ -147,7 +165,7 @@ submit.addEventListener("click", (e) => {
         myBook = new Book(bookTitle, bookAuthor, bookPages, bookStatus);
 
         myLibrary.push(myBook);
-        newRow();
+        newRow(myBook);
 
         myBook = "";
     }
