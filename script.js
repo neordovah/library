@@ -5,9 +5,6 @@ let removeRows = [];
 let changeStatus = [];
 let changeStatusTd = [];
 
-/////////
-/////////
-
 let title = document.getElementById("title");
 let author = document.getElementById("author");
 let pages = document.getElementById("pages");
@@ -50,16 +47,12 @@ function renameTrIds() {
     });
     number = 0;
     removeAllStatus.forEach(removeStatus => {
-       console.log(removeStatus, removeStatus.id)
         removeStatus.id = number;
-        console.log(removeStatus, removeStatus.id)
         number++;
     });
     number = 0;
     changeStatusTd.forEach(changeStatus => {
-        //console.log(changeStatus, changeStatus.id)
         changeStatus.id = number;
-        //console.log(changeStatus, changeStatus.id)
         number++;
     });
 }
@@ -196,8 +189,6 @@ removeRows.forEach(removeRow => {
                 removeFromLibrary(removeRow);
                 redoId(removeRow);
                 removeRow2(removeRow);
-                //remakeRows();   
-                
                 renameTrIds();
             }) 
         })
@@ -255,17 +246,3 @@ addBook.addEventListener("click", () => {
     toggleAddBook++;
     checkToggleBook(toggleAddBook);
 })
-/////
-
-
-/////////////////////////////////////////////////////////////////////
-////////////////////////NEW//////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////
-/*
-newRow cand adaugi o carte 
-cand stergi o carte -> myLibrary sterge cartea aia 
-                    -> fiecare carte de dupa isi schimba id (id-1)
-                    -> se sterg toate randurile
-                    -> se adauga din nou randurile de la myLibrary
-
-                    */
