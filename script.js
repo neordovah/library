@@ -12,6 +12,18 @@ let status = document.getElementById("status");
 
 let myLibrary = [];
 
+
+if (localStorage.getItem('books') === null) {
+    myLibrary = [];
+  } else {
+    const booksFromStorage = JSON.parse(localStorage.getItem('books'));
+    myLibrary = booksFromStorage;
+    for(let i = 0; i < myLibrary.length; i++) {
+        newRow(myLibrary[i]);
+    }
+  }
+
+
 function Book(title, author, pages, status) {
     this.title = title;
     this.author = author;
@@ -147,12 +159,15 @@ function changeImage(newStatus) {
     }
 }
 
-let tbody = document.getElementById("tbody");
-const form = document.getElementById("form");
 
-let newTrashcan;
 
 function newRow(myBook) {
+    localStorage.clear();
+    localStorage.setItem('books', JSON.stringify(myLibrary));
+    let tbody = document.getElementById("tbody");
+    const form = document.getElementById("form");
+    let newTrashcan;
+
     let row = document.createElement("tr");
     row.classList.add("removeAll");
     row.id = myBook.id;
@@ -190,6 +205,8 @@ removeRows.forEach(removeRow => {
                 redoId(removeRow);
                 removeRow2(removeRow);
                 renameTrIds();
+                localStorage.clear();
+                localStorage.setItem('books', JSON.stringify(myLibrary));
             }) 
         })
 
@@ -204,6 +221,8 @@ removeRows.forEach(removeRow => {
                     myLibrary[oneStatus.id].status = 0;
                 }
                 changeImage2(oneStatus);
+                localStorage.clear();
+                localStorage.setItem('books', JSON.stringify(myLibrary));
             })
         }
     })
@@ -214,8 +233,9 @@ removeRows.forEach(removeRow => {
 
 let myBook = "";
 
-
 //////EVENT LISTENERS
+
+
 
 submit.addEventListener("click", (e) => {
     e.preventDefault();
@@ -225,6 +245,7 @@ submit.addEventListener("click", (e) => {
         myBook = new Book(bookTitle, bookAuthor, bookPages, bookStatus);
 
         myLibrary.push(myBook);
+
         newRow(myBook);
 
         myBook = "";
