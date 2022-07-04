@@ -2,8 +2,8 @@ const addBook = document.getElementById("addBook");
 const submit = document.getElementById("submit");
 
 let removeRows = [];
-
-
+let changeStatus = [];
+let changeStatusTd = [];
 
 /////////
 /////////
@@ -35,6 +35,9 @@ function renameTrIds() {
     
     let removeAll = document.querySelectorAll(".removeAll");
     let removeAllCans = document.querySelectorAll(".remove");
+    let removeAllStatus = document.querySelectorAll(".status");
+    let changeStatusTd = document.querySelectorAll(".statusTd");
+
     let number = 0;
     removeAll.forEach(removeRow => {
         removeRow.id = number;
@@ -42,11 +45,22 @@ function renameTrIds() {
     });
     number = 0;
     removeAllCans.forEach(removeCan => {
-        console.log(removeCan.id)
-        console.log(number)
         removeCan.id = number;
         number++;
-        console.log(removeCan.id)
+    });
+    number = 0;
+    removeAllStatus.forEach(removeStatus => {
+       console.log(removeStatus, removeStatus.id)
+        removeStatus.id = number;
+        console.log(removeStatus, removeStatus.id)
+        number++;
+    });
+    number = 0;
+    changeStatusTd.forEach(changeStatus => {
+        //console.log(changeStatus, changeStatus.id)
+        changeStatus.id = number;
+        //console.log(changeStatus, changeStatus.id)
+        number++;
     });
 }
 
@@ -72,11 +86,11 @@ function getBookData() {
         bookPages = "-"
     }
     if(status.value == "not-started") {
-        bookStatus = "not-started";
+        bookStatus = 0;
     } else if(status.value == "on-going") {
-        bookStatus = "on-going";
+        bookStatus = 1;
     } else if(status.value == "finished") {
-        bookStatus = "finished";
+        bookStatus = 2;
     }
 }
 
@@ -108,11 +122,43 @@ function removeFromLibrary(removeRow) {
     });
 }
 
+function changeImage2(newStatus) {
+    let id = newStatus.id;
+    if(myLibrary[id].status == 0) {
+        newStatus.innerHTML = "";
+        newStatus.innerHTML = '<img src="./img/x.png" width="30">';
+    }
+    else if(myLibrary[id].status == 1) {
+        newStatus.innerHTML = "";
+        newStatus.innerHTML = '<img src="./img/arrow.png" width="30">';
+    }
+    else if(myLibrary[id].status == 2) {
+        newStatus.innerHTML = "";
+        newStatus.innerHTML = '<img src="./img/v.png" width="30">';
+    }
+}
+
+function changeImage(newStatus) {
+    let id = newStatus.id;
+    if(myLibrary[id].status == 0) {
+        newStatus.innerHTML = "";
+        newStatus.innerHTML = '<button class="status" id="'+myLibrary[id].id+'"><img src="./img/x.png" width="30"></button>';
+    }
+    else if(myLibrary[id].status == 1) {
+        newStatus.innerHTML = "";
+        newStatus.innerHTML = '<button class="status" id="'+myLibrary[id].id+'"><img src="./img/arrow.png" width="30"></button>';
+    }
+    else if(myLibrary[id].status == 2) {
+        newStatus.innerHTML = "";
+        newStatus.innerHTML = '<button class="status" id="'+myLibrary[id].id+'"><img src="./img/v.png" width="30"></button>';
+    }
+}
 
 let tbody = document.getElementById("tbody");
 const form = document.getElementById("form");
 
 let newTrashcan;
+
 function newRow(myBook) {
     let row = document.createElement("tr");
     row.classList.add("removeAll");
@@ -128,8 +174,11 @@ function newRow(myBook) {
     row.appendChild(newPages);
     newPages.innerText = myBook.pages;
     let newStatus = document.createElement("td");
+    newStatus.classList.add("statusTd");
+    newStatus.id = myBook.id;
+    changeImage(newStatus);
     row.appendChild(newStatus);
-    newStatus.innerText = myBook.status;
+
 
     newTrashcan = document.createElement("td");
     newTrashcan.classList.add("remove");
@@ -137,18 +186,38 @@ function newRow(myBook) {
     newTrashcan.innerHTML = '<button><img src="./img/trash.png"></button>';
     newTrashcan.id = myBook.id;
     tbody.appendChild(row);
-    removeRows = document.querySelectorAll(".remove");
 
-    removeRows.forEach(removeRow => {
-        if(row.id == removeRow.id)
-        removeRow.addEventListener("click", () => {
-            removeFromLibrary(removeRow);
-            redoId(removeRow);
-            removeRow2(removeRow);
-            //remakeRows();
-            renameTrIds();
-        }) 
+    removeRows = document.querySelectorAll(".remove");
+    
+
+removeRows.forEach(removeRow => {
+            if(row.id == removeRow.id)
+            removeRow.addEventListener("click", () => {
+                removeFromLibrary(removeRow);
+                redoId(removeRow);
+                removeRow2(removeRow);
+                //remakeRows();   
+                
+                renameTrIds();
+            }) 
+        })
+
+        changeStatusTd = document.querySelectorAll(".statusTd");
+        changeStatus = document.querySelectorAll(".status");
+
+    changeStatus.forEach(oneStatus => {
+        if(row.id == oneStatus.id) {
+            oneStatus.addEventListener("click", () => {
+                myLibrary[oneStatus.id].status++;
+                if(myLibrary[oneStatus.id].status > 2) {
+                    myLibrary[oneStatus.id].status = 0;
+                }
+                changeImage2(oneStatus);
+            })
+        }
     })
+
+    
 
 }
 
