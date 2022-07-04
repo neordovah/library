@@ -20,7 +20,6 @@ function Book(title, author, pages, status) {
     this.author = author;
     this.pages = pages;
     this.status = status;
-    this.id = myLibrary.length;
 }
 
 
@@ -29,14 +28,14 @@ function removeRow(row) {
     id = row.id;
     let removeRow = document.getElementById(`${id}`);
     removeRow.remove();
-    console.log(id)
 }
 
-
-function removeRow2(id) {
-    let removeRow = document.getElementById(`${id}`);
-    removeRow.remove();
+function addRow(row) {
+    id=row.id;
+    let addRow = document.getElementById(`${id}`);
+    newRow(row);
 }
+
 
 
 
@@ -74,70 +73,69 @@ function resetForm() {
     status.value = "not-started";
 }
 
-function  redoId (i) {
-    myLibrary[i].id = myLibrary[i].id-1;
-
-}
-
-function removeFromLibrary(removeRow) {
-    let id = parseInt(removeRow.id);
-    console.log(removeRow.id, "  ", id)
-    myLibrary = myLibrary.filter(Book => {
-    return (Book.id !== id)   
-        console.log(myLibrary)
-    });
-}
-
-
 let tbody = document.getElementById("tbody");
 const form = document.getElementById("form");
 
-let i = 0;
 let newTrashcan;
-function newRow() {
+function newRow(c) {
     let row = document.createElement("tr");
 
-    row.id = myBook.id;
+   // row.id = myLibrary.length-1;
+   row.id = c;
+
+   console.log(myLibrary[0])
 
     let newTitle = document.createElement("td");
     row.appendChild(newTitle);
-    newTitle.innerText = myBook.title;
+    newTitle.innerText = myLibrary[c].title;
     let newAuthor = document.createElement("td");
     row.appendChild(newAuthor);
-    newAuthor.innerText = myBook.author;
+    newAuthor.innerText = myLibrary[c].author;
     let newPages = document.createElement("td");
     row.appendChild(newPages);
-    newPages.innerText = myBook.pages;
+    newPages.innerText = myLibrary[c].pages;
     let newStatus = document.createElement("td");
     row.appendChild(newStatus);
-    newStatus.innerText = myBook.status;
+    newStatus.innerText = myLibrary[c].status;
+    
+    function removeFromLibrary(row) {
+        let id = row.id;
+        myLibrary.splice(id, 1);  
+    }
 
     newTrashcan = document.createElement("td");
     newTrashcan.classList.add("remove");
     row.appendChild(newTrashcan);
     newTrashcan.innerHTML = '<button><img src="./img/trash.png"></button>';
-    newTrashcan.id = i;
+    newTrashcan.id = c;
     tbody.appendChild(row);
-    removeRows = document.querySelectorAll(".remove");
+   
 
-    removeRows.forEach(removeRow => {
-        if(row.id == removeRow.id)
-        removeRow.addEventListener("click", () => {
-            removeFromLibrary(removeRow);
-            console.log(removeRow.id)
-        }) 
+     removeRows = document.querySelectorAll(".remove");
+for(let a = 0; a < removeRows.length; a++) {
+       // if(removeRows[a].id == row.id)
+          removeRows[a].addEventListener("click", () => {
+            removeFromLibrary(row);     
+            
+            for(let b = a; b < myLibrary.length; b++) {
+                removeRow(row);
+           }
+           for(let c = a; c < myLibrary.length; c++) {
+            addRow(c);
+           }
+            
     })
+    }
 
-    
-
-    
-    i++;
 }
+
+
 
 let myBook = "";
 
-
 //////EVENT LISTENERS
+
+
 
 submit.addEventListener("click", (e) => {
     e.preventDefault();
@@ -147,8 +145,7 @@ submit.addEventListener("click", (e) => {
         myBook = new Book(bookTitle, bookAuthor, bookPages, bookStatus);
 
         myLibrary.push(myBook);
-        newRow();
-
+        newRow(myLibrary.length-1);
         myBook = "";
     }
     
@@ -168,17 +165,3 @@ addBook.addEventListener("click", () => {
     toggleAddBook++;
     checkToggleBook(toggleAddBook);
 })
-/////
-
-
-/////////////////////////////////////////////////////////////////////
-////////////////////////NEW//////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////
-/*
-newRow cand adaugi o carte 
-cand stergi o carte -> myLibrary sterge cartea aia 
-                    -> fiecare carte de dupa isi schimba id (id-1)
-                    -> se sterg toate randurile
-                    -> se adauga din nou randurile de la myLibrary
-
-                    */
